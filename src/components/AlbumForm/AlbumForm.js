@@ -16,6 +16,7 @@ const AlbumForm = ({setShowToast , setToastType}) => {
   }
 
 
+  // adding album ot firebase
   const handleForm = async () => {
     try {
       const docRef = doc(collection(db, 'Albums'));
@@ -28,7 +29,6 @@ const AlbumForm = ({setShowToast , setToastType}) => {
     } catch (error) {
       setShowToast('Something Went Wrong')
       setToastType('error')
-      console.error('Error adding album:', error);
     }
   };
 

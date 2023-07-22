@@ -25,6 +25,8 @@ function App() {
 
 
   return (
+
+    // wrapped the app with searchcontext
     <CustomSearchContext>
       <RouterProvider router = {browserRouter} />
       </CustomSearchContext>

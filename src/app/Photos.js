@@ -26,14 +26,16 @@ const Photos = () => {
 
   const [state , dispatch] = useReducer(photosReducer , {photos : []})
 
+  
+  // destructuring context
    const {  setData , handleSearch } = useValue()
 
-
-   console.log(handleSearch , "32");
 
   useEffect(() =>{
     fetchPhotos()
   },[])
+
+  // fetching photo list form firebase
 
   const fetchPhotos = async () =>{
     onSnapshot(collection(db , 'Photos') , (snapShot) =>{
@@ -51,12 +53,14 @@ const Photos = () => {
     })
   }
 
+  // handling form visibility
+
   const handleForm  = () =>{
   setShowForm(!showForm)
   }
 
 
-  // log
+  // add photos to firebase
 
   const addPhotos = async (photos) => {
     const docRef = doc(collection(db , 'Photos'))
@@ -70,8 +74,11 @@ const Photos = () => {
     toast.success('Photo Added Successfully!')
   }
   
-  const filteredData = handleSearch?.filter((item) => item?.AlbumId === albumId)
+  // filtering data uniquely according to album
+  const filteredData = handleSearch?.filter((item) => item?.AlbumId === albumId)   
 
+
+  // updating photos to firebase
   const updatePhotos = async (photos) => {
     const photoPos = filteredData.findIndex((item) => item.id === photosToUpdate.id)
     if(photoPos === -1){
@@ -95,12 +102,14 @@ const Photos = () => {
     }
   }
 
+  // handling edit behaviour
   const handleEdit = (data) =>{
     setPhotosToUpdate(data)
     setShowForm(true)
     window.scrollTo(0 , 0)
   }
 
+  // deleting photos from firebase
   const deletePhoto = async (id) =>{
     const docRef =  doc(db , 'Photos' , id);
     await deleteDoc(docRef)

@@ -1,3 +1,5 @@
+// reducer function handle operation for photos
+
 export function photosReducer(state , action){
     const {payload} = action
     
