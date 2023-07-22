@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { Component, useEffect, useState } from 'react'
 import AlbumForm from '../components/AlbumForm/AlbumForm'
 import { Button } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -21,9 +21,13 @@ const Home = () => {
   const [toastType, setToastType] = useState('')
   const [albumList, setAlbumList] = useState()
 
-  const {  search ,  setData , handleSearch } = useValue()
 
-  console.log(search , "26");
+  // context states
+  const {  setData , handleSearch } = useValue()
+
+  
+
+  // handling toast Notification
 
   useEffect(() => {
   if(showToast){
@@ -50,7 +54,7 @@ const Home = () => {
 
 
   
-
+// function to fetch data form  firebase
   const fetchAlbums =  () =>{
     onSnapshot(collection(db , 'Albums') , (snapShot) =>{
       const albums = snapShot.docs.map((doc) =>{
@@ -63,6 +67,8 @@ const Home = () => {
       setData(albums)
     })
   }  
+
+  // function to handle form visibility
   
   const handleForm = () => {
     setshowForm(!showForm)
@@ -88,6 +94,7 @@ const Home = () => {
       <div className='mt-5 mx-5 d-flex'>
       {handleSearch?.length > 0 ?  handleSearch?.map((item , index) =>{
         return(
+          // album list Component
           <AlbumList album = {item}  index = {index}/>
         )
       }) : <div className='text-muted text-center w-100'>No Album Found</div>}

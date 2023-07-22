@@ -3,16 +3,20 @@ import { createContext, useContext, useState } from "react";
 
 const searchContext =  createContext();
 
+
+// Custom hooks
 function useValue(){
     const value =  useContext(searchContext);
     return value;
 }
 
+
+// Global search context
 function CustomSearchContext({children}){
     
     const [search , setSearch] = useState();
     const [data , setData] = useState()
-    console.log(data , "15");
+   
 
     const handleSearch =  data?.filter((item) =>{
      let data;
@@ -28,7 +32,6 @@ function CustomSearchContext({children}){
         return data;
     })
 
-    console.log(handleSearch , "25");
  
 
     return(
